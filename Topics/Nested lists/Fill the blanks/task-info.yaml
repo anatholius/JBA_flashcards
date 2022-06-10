@@ -9,5 +9,8 @@ files:
     els = [el for __ in x for __ in a __ el > 0]
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6712#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Fri, 10 Jun 2022 18:42:56 UTC
 record: -1
