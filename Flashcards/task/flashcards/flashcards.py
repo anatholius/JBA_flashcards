@@ -40,6 +40,7 @@ class Flashcard:
                         list(self.terms.values()).index(answer)
                     ]
                     correct_term = self.terms[correct_answer]
+
                     print(
                         f'Wrong. The right answer is "{definition}", '
                         f'but your definition is correct for "'
