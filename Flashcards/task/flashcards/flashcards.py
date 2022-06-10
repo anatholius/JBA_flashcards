@@ -3,29 +3,27 @@ from collections import deque
 
 class Flashcard:
 
-    def __init__(self, count):
+    def __init__(self, count: int):
         self.count = count
         self.terms = {}
 
     def define(self):
-        defs = set(list([('a', '1'), ('s', '2')]))
         while len(self.terms) < self.count:
-            item = defs.pop()
-            self.terms[item[0]] = item[1]
+            no = len(self.terms) + 1
+            term = input(f'The term for card #{no}:\n')
+            definition = input(f'The definition for card #{no}:\n')
+            self.terms[term] = definition
         return self
 
     def ask(self):
-        quiz = deque(set(self.terms.items()))
-        while len(quiz) > 0:
-            item = quiz[0]
-            if input(f'Type definition for "{item[0]}": ') == item[1]:
-                print('Correct')
-                quiz.popleft()
+        for term, definition in self.terms.items():
+            print(f'Print the definition of "{term}":')
+            answer = input()
+            if answer == definition:
+                print('Correct!')
             else:
-                print(f'Wrong. The right answer is "{item[1]}"')
-
-        print('No more cards!')
+                print(f'Wrong. The right answer is "{definition}"')
 
 
-flash = Flashcard(2).define()
+flash = Flashcard(int(input('Input the number of cards:\n'))).define()
 flash.ask()
