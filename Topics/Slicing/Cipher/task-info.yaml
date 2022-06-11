@@ -5,5 +5,8 @@ files:
   text: string = "no clouds here to spy on pets"
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6968#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sat, 11 Jun 2022 12:52:34 UTC
 record: -1
