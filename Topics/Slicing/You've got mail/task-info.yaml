@@ -8,5 +8,8 @@ files:
     # remember: the variable email is already defined
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6966#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sat, 11 Jun 2022 13:17:35 UTC
 record: -1
