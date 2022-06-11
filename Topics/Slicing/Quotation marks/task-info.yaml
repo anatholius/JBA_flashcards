@@ -7,5 +7,8 @@ files:
     string = input()
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9151#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sat, 11 Jun 2022 13:09:09 UTC
 record: -1
