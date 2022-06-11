@@ -39,7 +39,7 @@ class Flashcard:
                     correct_answer = list(self.terms.keys())[
                         list(self.terms.values()).index(answer)
                     ]
-                    correct_term = self.terms[correct_answer]
+                    # correct_term = self.terms[correct_answer]
 
                     print(
                         f'Wrong. The right answer is "{definition}", '
