@@ -9,5 +9,8 @@ files:
     print(numbers[4:16:-1])  # the line with an error
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6969#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sat, 11 Jun 2022 13:32:52 UTC
 record: -1
