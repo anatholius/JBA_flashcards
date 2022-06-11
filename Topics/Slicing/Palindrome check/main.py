@@ -1,6 +1,6 @@
 # please work with the preset variable `word`
-forward =  # define here
-backward =  # define here
+forward = word[:]
+backward = word[::-1]
 
 if forward == backward:
     print("Yes")

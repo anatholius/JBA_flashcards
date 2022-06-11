@@ -13,5 +13,8 @@ files:
         print("No")
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6971#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sat, 11 Jun 2022 13:07:04 UTC
 record: -1
