@@ -6,3 +6,4 @@ content:
 - Check the type
 - Code analysis
 - Invalid inputs and the ValueError
+- PEP 8 conventions
