@@ -15,5 +15,8 @@ files:
     print(' '.join(sentence))
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6268#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sun, 12 Jun 2022 19:48:49 UTC
 record: -1
