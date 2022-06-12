@@ -10,5 +10,8 @@ files:
     n = int(input())
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/7003#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sun, 12 Jun 2022 19:44:20 UTC
 record: -1
