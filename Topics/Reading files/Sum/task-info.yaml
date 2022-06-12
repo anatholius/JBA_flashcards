@@ -4,6 +4,12 @@ files:
   visible: true
   text: '# read sums.txt'
   learner_created: false
+- name: sums.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8145#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Sun, 12 Jun 2022 23:30:46 UTC
 record: -1
