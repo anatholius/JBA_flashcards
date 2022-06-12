@@ -3,3 +3,6 @@ content:
 - Checking inputs
 - Expected inputs
 - Built-in methods
+- Check the type
+- Code analysis
+- Invalid inputs and the ValueError
