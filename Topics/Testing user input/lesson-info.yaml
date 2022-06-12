@@ -7,3 +7,4 @@ content:
 - Code analysis
 - Invalid inputs and the ValueError
 - PEP 8 conventions
+- Several testings
