@@ -1,5 +1,8 @@
 class Flashcard:
-    ACTIONS = ('add', 'remove', 'import', 'export', 'ask', 'exit')
+    ACTIONS = (
+        'add', 'remove', 'import', 'export', 'ask', 'exit',
+        # TODO: next stage (6): 'log, hardest card', 'reset stats'
+    )
 
     def __init__(self):
         self.terms = dict()
@@ -83,6 +86,33 @@ class Flashcard:
                 if k > len(self.terms) - 1:
                     k = 0
 
+    def log(self):
+        """
+        ask the user where to save the log with the message File name:,
+        save all the lines that have been input in/output to the console to
+        the file, and print the message The log has been saved. Don't clear
+        the log after saving it to the file.
+        """
+        pass
+
+    def hardest_card(self):
+        """
+        print a string that contains the term of the card with the highest
+        number of wrong answers, for example, The hardest card is "term".
+        You have N errors answering it. If there are several cards with the
+        highest number of wrong answers, print all of the terms: The hardest
+        cards are "term_1", "term_2". If there are no cards with errors in
+        the user's answers, print the message There are no cards with errors.
+        """
+        pass
+
+    def reset_logs(self):
+        """
+        set the count of mistakes to 0 for all the cards and output the
+        message Card statistics have been reset.
+        """
+        pass
+
     def run(self):
         actions = ', '.join([a for a in self.ACTIONS])
         action = input(f"\nInput the action ({actions}):\n")
@@ -96,6 +126,8 @@ class Flashcard:
             self.export_flashes()
         elif action == 'ask':
             self.ask()
+        elif action != 'exit':
+            raise Exception('Unknown action!')
 
         if action != 'exit':
             self.run()
