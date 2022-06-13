@@ -3,13 +3,12 @@ files:
 - name: main.py
   visible: true
   text: |-
-    str_1 = input()
-    str_2 = input()
-    str_3 = input()
+    def create_function(n):
+        return ...
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/6814#comment
+feedback_link: https://hyperskill.org/learn/step/7100#comment
 status: Solved
 feedback:
   message: <html>Correct solution</html>
-  time: Mon, 13 Jun 2022 02:58:19 UTC
+  time: Mon, 13 Jun 2022 05:35:41 UTC
 record: -1
