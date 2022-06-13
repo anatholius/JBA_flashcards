@@ -287,22 +287,8 @@ files:
         FlashcardsTest("flashcards.flashcards").run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/10810#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Exception in test #1
-
-    Traceback (most recent call last):
-      File "flashcards.py", line 52, in <module>
-        flash = Flashcard(int(input('Input the number of cards:\n'))).define()
-    ValueError: invalid literal for int() with base 10: 'exit'
-
-    Please find below the output of your program during this failed test.
-    Note that the '>' character indicates the beginning of the input line.
-
-    ---
-
-    Input the number of cards:
-    > exit
-  time: Mon, 13 Jun 2022 00:29:18 UTC
+  message: Congratulations!
+  time: Mon, 13 Jun 2022 01:59:45 UTC
 record: 5
