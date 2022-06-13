@@ -1,2 +1,2 @@
 def create_function(n):
-    return ...
+    return lambda x: x % n
