@@ -11,5 +11,8 @@ files:
     result = (lambda ...)(a, b, c)
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/7097#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Mon, 13 Jun 2022 05:41:19 UTC
 record: -1
