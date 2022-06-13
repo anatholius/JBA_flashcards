@@ -7,5 +7,8 @@ files:
     # print all numbers without spaces
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/7460#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Mon, 13 Jun 2022 02:37:47 UTC
 record: -1
