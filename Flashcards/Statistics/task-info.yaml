@@ -402,5 +402,21 @@ files:
         FlashcardsTest("flashcards.flashcards").run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/10811#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #1
+
+    Your program doesn't output the starting message in the required format:
+    Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats)
+
+    Please find below the output of your program during this failed test.
+    Note that the '>' character indicates the beginning of the input line.
+
+    ---
+
+    Input the action (add, remove, import, export, ask, exit):
+    > exit
+    Bye bye!
+  time: Tue, 14 Jun 2022 18:18:11 UTC
 record: -1
