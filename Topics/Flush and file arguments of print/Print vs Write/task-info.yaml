@@ -7,5 +7,8 @@ files:
     # save this list in `file_with_list.txt`
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9331#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Wed, 15 Jun 2022 01:14:26 UTC
 record: -1
