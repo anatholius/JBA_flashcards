@@ -1,10 +1,10 @@
 type: choice
 is_multiple_choice: false
 options:
-- text: (1, 'A'), (2, 'B'), (3, 'C'), (1, 'D')
-- text: (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D')
-- text: None, zip( ) can't take iterables of unequal lengths.
 - text: (1, 'A'), (2, 'B'), (3, 'C')
+- text: (1, 'A'), (2, 'B'), (3, 'C'), (1, 'D')
+- text: None, zip( ) can't take iterables of unequal lengths.
+- text: (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D')
 files:
 - name: main.py
   visible: true

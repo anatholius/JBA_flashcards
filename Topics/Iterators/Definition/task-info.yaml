@@ -2,9 +2,9 @@ type: choice
 is_multiple_choice: false
 options:
 - text: Iteratable
-- text: Loop
-- text: Iterator
 - text: enumerate
+- text: Iterator
+- text: Loop
 files:
 - name: main.py
   visible: true

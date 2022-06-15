@@ -1,0 +1,14 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: "import logging\n# initialize the logger\n...\ndef hypotenuse(a, b):\n   \
+    \ h = round(((a ** 2 + b ** 2) ** 0.5), 2) \n    # call the logger\n    ...\n\
+    \    return h"
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15965#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Wed, 15 Jun 2022 15:36:01 UTC
+record: -1

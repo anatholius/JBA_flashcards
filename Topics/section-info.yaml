@@ -14,3 +14,4 @@ content:
 - Sorting a list
 - Context manager
 - Flush and file arguments of print
+- Logging

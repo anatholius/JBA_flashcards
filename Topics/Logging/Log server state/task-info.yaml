@@ -4,21 +4,16 @@ files:
   visible: true
   placeholders:
   - offset: 0
-    length: 41
+    length: 4
     placeholder_text: type your solution here
     initial_state:
-      length: 41
+      length: 23
       offset: 0
     initialized_from_dependency: false
     selected: true
-    status: Failed
+    status: Solved
   text: type your solution here
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/10347#comment
-status: Failed
-feedback:
-  message: |-
-    Internal error: RPC method failed badly (KeyError): 'files'
-    Please try to submit again.
-  time: Wed, 15 Jun 2022 01:23:00 UTC
+feedback_link: https://hyperskill.org/learn/step/15963#comment
+status: Solved
 record: -1

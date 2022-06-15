@@ -1,10 +1,10 @@
 type: choice
 is_multiple_choice: false
 options:
-- text: zip( )
-- text: enumerate( )
-- text: iter( )
-- text: for
+- text: Format
+- text: Level
+- text: Logs can not be formatted
+- text: Encoding
 files:
 - name: main.py
   visible: true
@@ -12,6 +12,6 @@ files:
     #  You can experiment here, it won’t be checked
 
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/8482#comment
+feedback_link: https://hyperskill.org/learn/step/15961#comment
 status: Solved
 record: -1
