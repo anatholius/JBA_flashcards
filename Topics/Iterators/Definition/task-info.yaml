@@ -1,10 +1,10 @@
 type: choice
 is_multiple_choice: false
 options:
-- text: Iteratable
-- text: enumerate
 - text: Iterator
+- text: enumerate
 - text: Loop
+- text: Iteratable
 files:
 - name: main.py
   visible: true

@@ -1,9 +1,9 @@
 type: choice
 is_multiple_choice: false
 options:
-- text: IndexOutOfRange exception
 - text: StopIteration exception
 - text: '''C'''
+- text: IndexOutOfRange exception
 - text: '''D'''
 - text: '''A'''
 files:

@@ -1,10 +1,10 @@
 type: choice
 is_multiple_choice: false
 options:
-- text: zip( )
-- text: enumerate( )
-- text: iter( )
 - text: for
+- text: zip( )
+- text: iter( )
+- text: enumerate( )
 files:
 - name: main.py
   visible: true

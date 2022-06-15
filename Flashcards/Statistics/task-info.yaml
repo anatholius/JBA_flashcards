@@ -401,6 +401,12 @@ files:
     if __name__ == "__main__":
         FlashcardsTest("flashcards.flashcards").run_tests()
   learner_created: false
+- name: flashcards/cards.txt
+  visible: true
+  learner_created: true
+- name: flashcards/reg.log
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/10811#comment
 status: Failed
 feedback:

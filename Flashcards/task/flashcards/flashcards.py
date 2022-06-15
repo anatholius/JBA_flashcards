@@ -1,11 +1,31 @@
+import inspect
+import logging
+import sys
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+error_logger = logging.getLogger()
+error_logger.setLevel(40)
+error_handler = logging.StreamHandler(sys.stderr)
+error_logger.addHandler(error_handler)
+
+
 class Flashcard:
     ACTIONS = (
         'add', 'remove', 'import', 'export', 'ask', 'exit',
-        # TODO: next stage (6): 'log, hardest card', 'reset stats'
+        # stage 6:
+        'log', 'hardest card', 'reset stats'
     )
+    log_file = 'log.log'
+    cards_file = 'cards.txt'
 
     def __init__(self):
         self.terms = dict()
+
+        cards = open(self.cards_file, 'w')
+        cards.flush()
+        cards.close()
 
     def add(self):
         term = input(f'The card:\n')
@@ -19,12 +39,22 @@ class Flashcard:
                 f'again:\n')
 
         self.terms[term] = definition
+        with open(self.cards_file, 'w') as cards:
+            cards_list = [f'{t} {d}\n' for t, d in self.terms.items()]
+            print('Trying to add card to cards: ', self.terms, cards_list)
+            cards.writelines(cards_list)
+            cards.flush()
+
         print(f'The pair ("{term}":"{definition}") has been added.')
 
     def remove(self):
         term = input("Which card?\n")
         try:
             del self.terms[term]
+            with open(self.cards_file, 'w') as cards:
+                cards_list = [f'{t} {d}\n' for t, d in self.terms.items()]
+                cards.writelines(cards_list)
+                cards.flush()
             print('The card has been removed.')
         except KeyError:
             print(f'Can\'t remove "{term}": there is no such card.')
@@ -55,12 +85,20 @@ class Flashcard:
         print(f'{len(self.terms)} cards have been saved.')
 
     def ask(self):
-        count = int(input('How many times to ask?'))
+        count = int(input('How many times to ask?\n'))
 
         terms = list(self.terms.keys())
         k = 0
         for i in range(count):
-            term = terms[k]
+            try:
+                term = terms[k]
+            except IndexError:
+                print(
+                    f'Ups! There is no card in cards with index: {k}',
+                    file=sys.stderr
+                )
+                break
+
             definition = self.terms[term]
             print(f'Print the definition of "{term}":')
             answer = input()
@@ -93,7 +131,14 @@ class Flashcard:
         the file, and print the message The log has been saved. Don't clear
         the log after saving it to the file.
         """
-        pass
+        self.log_file = input('File name:\n')
+        with open(self.log_file, 'w') as registry:
+            registry.flush()
+
+        logger_handler = logging.FileHandler(filename=self.log_file)
+        logger_format = '%(asctime)s | %(levelname)s: %(message)s'
+        logger_handler.setFormatter(logging.Formatter(logger_format))
+        logger.addHandler(logger_handler)
 
     def hardest_card(self):
         """
@@ -104,14 +149,20 @@ class Flashcard:
         cards are "term_1", "term_2". If there are no cards with errors in
         the user's answers, print the message There are no cards with errors.
         """
-        pass
+        print(f'Function "{inspect.stack()[0][3]}" is not implemented jet!',
+              file=sys.stderr)
 
-    def reset_logs(self):
+        return
+
+    def reset_stats(self):
         """
         set the count of mistakes to 0 for all the cards and output the
         message Card statistics have been reset.
         """
-        pass
+        print(f'Function "{inspect.stack()[0][3]}" is not implemented jet!',
+              file=sys.stderr)
+
+        return
 
     def run(self):
         actions = ', '.join([a for a in self.ACTIONS])
@@ -126,6 +177,12 @@ class Flashcard:
             self.export_flashes()
         elif action == 'ask':
             self.ask()
+        elif action == 'log':
+            self.log()
+        elif action == 'reset stats':
+            self.reset_stats()
+        elif action == 'hardest card':
+            self.hardest_card()
         elif action != 'exit':
             raise Exception('Unknown action!')
 
