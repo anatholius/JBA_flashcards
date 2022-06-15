@@ -1,0 +1,12 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: '# initialize your logger here'
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15966#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Wed, 15 Jun 2022 14:56:07 UTC
+record: -1
