@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/406082/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Sun, 12 Jun 2022 22:10:06 UTC
+update_date: Wed, 15 Jun 2022 01:24:19 UTC
 stages:
 - id: 673
   step: 10806
@@ -22,7 +22,7 @@ stages:
   is_completed: true
 - id: 678
   step: 10811
-  is_completed: false
+  is_completed: true
 - id: 679
   step: 10812
   is_completed: false
@@ -195,6 +195,8 @@ topics:
     theory_id: 16547
   - title: The big O notation
     theory_id: 16699
+  - title: Best, average and worst cases
+    theory_id: 20084
   - title: Data structures
     theory_id: 16927
   - title: Sep and end arguments of print

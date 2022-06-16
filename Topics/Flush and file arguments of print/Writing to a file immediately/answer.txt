@@ -1,0 +1,1 @@
+print(item, file=opened_file, flush=True)

@@ -5,5 +5,8 @@ files:
   text: '# the variable M is already defined'
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6943#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Mon, 13 Jun 2022 03:02:58 UTC
 record: -1
