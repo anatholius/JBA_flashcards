@@ -1,3 +1,2 @@
 args = sys.argv
-
-# further code of the script "add_four_numbers.py"
+print(sum([int(n) for i, n in enumerate(args) if i > 0]))
