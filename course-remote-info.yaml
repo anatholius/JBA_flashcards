@@ -195,6 +195,8 @@ topics:
     theory_id: 16547
   - title: The big O notation
     theory_id: 16699
+  - title: Best, average and worst cases
+    theory_id: 20084
   - title: Data structures
     theory_id: 16927
   - title: Sep and end arguments of print
