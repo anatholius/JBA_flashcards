@@ -17,10 +17,10 @@ class Flashcard:
         self.terms = dict()
         self.logs = []
 
-        with open('./flashcards/debug.log', 'w') as debug:
+        with open('./debug.log', 'w') as debug:
             debug.flush()
 
-        logger_handler = logging.FileHandler(filename='./flashcards/debug.log')
+        logger_handler = logging.FileHandler(filename='./debug.log')
         logger_format = '%(asctime)s [%(levelname)s]: %(message)s'
         logger_handler.setFormatter(logging.Formatter(logger_format))
         logger.addHandler(logger_handler)
@@ -37,7 +37,7 @@ class Flashcard:
             print(message, file=output)
 
     def save_terms(self):
-        with open(f'./{self.cards_file}', 'w') as cards:
+        with open(f'../{self.cards_file}', 'w') as cards:
             cards_list = [f'{t} {d["definition"]} {d["errors"]}\n' for t, d in
                           self.terms.items()]
             cards.writelines(cards_list)
@@ -77,7 +77,7 @@ class Flashcard:
     def import_flashes(self):
         file_name = input('File Name:\n')
         try:
-            with open(f'./{file_name}') as flashes:
+            with open(f'../{file_name}') as flashes:
                 lines = flashes.readlines()
                 imported = [line.strip() for line in lines]
 
@@ -93,7 +93,7 @@ class Flashcard:
 
     def export_flashes(self):
         file_name = input('File Name:\n')
-        with open(f'./{file_name}', 'w') as flash_file:
+        with open(f'../{file_name}', 'w') as flash_file:
             flash_file.writelines(
                 [f'{t}:{d["definition"]}:{d["errors"]}\n' for t, d in
                  self.terms.items()]
@@ -151,7 +151,7 @@ class Flashcard:
         the log after saving it to the file.
         """
         self.log_file = input('File name:\n')
-        with open(f'./{self.log_file}', 'w') as registry:
+        with open(f'../{self.log_file}', 'w') as registry:
             registry.writelines(self.logs)
             registry.flush()
             self.say("The log has been saved.")
@@ -226,6 +226,6 @@ class Flashcard:
         return self
 
 
-game = Flashcard().run()
-
-game.say("Bye bye!")
+if __name__ == '__main__':
+    game = Flashcard().run()
+    game.say("Bye bye!")
