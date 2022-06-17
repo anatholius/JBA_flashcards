@@ -1,4 +1,6 @@
+import argparse
 import logging
+import os
 import sys
 
 logger = logging.getLogger()
@@ -12,19 +14,37 @@ class Flashcard:
     )
     log_file = 'log.txt'
     cards_file = 'cards.txt'
+    after = None
 
-    def __init__(self):
+    def __init__(self, **args):
+        self.saved = False
         self.terms = dict()
         self.logs = []
+        self.args = args
 
-        with open('./flashcards/debug.log', 'w') as debug:
+        current_dir = os.getcwd()
+        if current_dir.endswith('flashcards'):
+            debug_file = f'{current_dir}/debug.log'
+        else:
+            debug_file = f'{current_dir}/flashcards/debug.log'
+
+        with open(debug_file, 'w') as debug:
             debug.flush()
 
-        logger_handler = logging.FileHandler(filename='./flashcards/debug.log')
+        logger_handler = logging.FileHandler(filename=debug_file)
         logger_format = '%(asctime)s [%(levelname)s]: %(message)s'
         logger_handler.setFormatter(logging.Formatter(logger_format))
         logger.addHandler(logger_handler)
-        logger.setLevel(logging.WARNING)
+        logger.setLevel(logging.DEBUG)
+
+        from_ = args['import_from']
+        to_ = args['export_to']
+        if from_ is not None:
+            logger.debug(f'We should import flashes from file: "{from_}"')
+            self.import_flashes(from_)
+        if to_ is not None:
+            logger.debug(f'We should export at the end to file: "{to_}"')
+            self.after = lambda: self.export_flashes(args['export_to'])
 
     def say(self, message, output=None):
         if output is None:
@@ -74,8 +94,11 @@ class Flashcard:
         except KeyError:
             self.say(f'Can\'t remove "{term}": there is no such card.')
 
-    def import_flashes(self):
-        file_name = input('File Name:\n')
+    def import_flashes(self, file_name=None):
+        with_args = file_name is not None
+        if file_name is None:
+            file_name = input('File Name:\n')
+
         try:
             with open(f'./{file_name}') as flashes:
                 lines = flashes.readlines()
@@ -89,17 +112,22 @@ class Flashcard:
                 flashes.close()
 
         except FileNotFoundError:
-            self.say('File not found.')
+            if not with_args:
+                self.say('File not found.')
 
-    def export_flashes(self):
-        file_name = input('File Name:\n')
-        with open(f'./{file_name}', 'w') as flash_file:
-            flash_file.writelines(
-                [f'{t}:{d["definition"]}:{d["errors"]}\n' for t, d in
-                 self.terms.items()]
-            )
-            flash_file.flush()
-        self.say(f'{len(self.terms)} cards have been saved.')
+    def export_flashes(self, file_name=None):
+        if file_name is None:
+            file_name = input('File Name:\n')
+        if len(self.terms.items()):
+            with open(f'./{file_name}', 'w') as flash_file:
+                flash_file.writelines(
+                    [f'{t}:{d["definition"]}:{d["errors"]}\n' for t, d in
+                     self.terms.items()]
+                )
+                flash_file.flush()
+            self.say(f'{len(self.terms)} cards have been saved.')
+        else:
+            print('There is nothing to export', file=sys.stderr)
 
     def ask(self):
         self.say('How many times to ask?')
@@ -134,7 +162,8 @@ class Flashcard:
                     self.say(message)
                 else:
                     self.say(f'Wrong. The right answer is "{definition}"')
-                self.terms[term]['errors'] = self.terms[term]['errors'] + 1
+                self.terms[term]['errors'] = int(
+                    self.terms[term]['errors']) + 1
                 self.save_terms()
             if i + 1 > count:
                 break
@@ -223,9 +252,20 @@ class Flashcard:
 
         if action != 'exit':
             self.run()
+
+        if self.after is not None and not self.saved:
+            logger.debug('We should export when exit to given file file:')
+            self.after()
+            self.saved = True
+
         return self
 
 
-game = Flashcard().run()
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--import_from')
+parser.add_argument('-e', '--export_to')
 
-game.say("Bye bye!")
+if __name__ == '__main__':
+    arguments = parser.parse_args().__dict__
+    game = Flashcard(**arguments).run()
+    game.say("Bye bye!")
