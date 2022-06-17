@@ -488,6 +488,12 @@ files:
 - name: flashcards/debug.log
   visible: true
   learner_created: true
+- name: flashcards/vocab.txt
+  visible: true
+  learner_created: true
+- name: flashcards/cards.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/10812#comment
 status: Solved
 feedback:
