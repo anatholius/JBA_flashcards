@@ -1,0 +1,15 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    text = [["Glitch", "is", "a", "minor", "problem", "that", "causes", "a", "temporary", "setback"],
+            ["Ephemeral", "lasts", "one", "day", "only"],
+            ["Accolade", "is", "an", "expression", "of", "praise"]]
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6321#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Mon, 13 Jun 2022 02:51:28 UTC
+record: -1

@@ -140,6 +140,9 @@ files:
     if __name__ == "__main__":
         FlashcardsTest("flashcards.flashcards").run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/127/stages/675/implement#comment
-status: Unchecked
-record: -1
+feedback_link: https://hyperskill.org/learn/step/10808#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Fri, 10 Jun 2022 19:18:06 UTC
+record: 3

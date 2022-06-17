@@ -1,0 +1,20 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: <code>sorted_numbers = reversed(numbers)</code>
+- text: <code>numbers.reverse()</code>
+- text: <code>sorted_numbers = sorted(numbers)</code>
+- text: <code>numbers.sort(reverse=True)</code>
+- text: <code>numbers.sort(reverse=False)</code>
+- text: <code>sorted_numbers = sorted(numbers, reverse=True)</code>
+files:
+- name: main.py
+  visible: true
+  text: |+
+    #  You can experiment here, it won’t be checked
+
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6787#comment
+status: Solved
+record: -1
+custom_name: Which method did it?
