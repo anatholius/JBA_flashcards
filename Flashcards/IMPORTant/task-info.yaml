@@ -482,6 +482,16 @@ files:
     if __name__ == "__main__":
         FlashcardsTest("flashcards.flashcards").run_tests()
   learner_created: false
+- name: flashcards/debug.log
+  visible: true
+  learner_created: true
+- name: cards.txt
+  visible: true
+  text: |
+    Canada Ottawa 0
+    Japan Tokyo 0
+    Poland Warsaw 0
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/10812#comment
 status: Unchecked
-record: -1
+record: 7

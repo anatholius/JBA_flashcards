@@ -1,7 +1,14 @@
+import inspect
 import logging
 import sys
 
 logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+error_logger = logging.getLogger()
+error_logger.setLevel(40)
+error_handler = logging.StreamHandler(sys.stderr)
+error_logger.addHandler(error_handler)
 
 
 class Flashcard:
@@ -10,100 +17,75 @@ class Flashcard:
         # stage 6:
         'log', 'hardest card', 'reset stats'
     )
-    log_file = 'log.txt'
+    log_file = 'log.log'
     cards_file = 'cards.txt'
 
     def __init__(self):
         self.terms = dict()
-        self.logs = []
 
-        with open('./debug.log', 'w') as debug:
-            debug.flush()
-
-        logger_handler = logging.FileHandler(filename='./debug.log')
-        logger_format = '%(asctime)s [%(levelname)s]: %(message)s'
-        logger_handler.setFormatter(logging.Formatter(logger_format))
-        logger.addHandler(logger_handler)
-        logger.setLevel(logging.WARNING)
-
-    def say(self, message, output=None):
-        if output is None:
-            output = 'info'
-
-        if output == 'info':
-            print(message)
-            self.logs.append(f'{message}\n')
-        else:
-            print(message, file=output)
-
-    def save_terms(self):
-        with open(f'../{self.cards_file}', 'w') as cards:
-            cards_list = [f'{t} {d["definition"]} {d["errors"]}\n' for t, d in
-                          self.terms.items()]
-            cards.writelines(cards_list)
-            cards.flush()
+        cards = open(self.cards_file, 'w')
+        cards.flush()
+        cards.close()
 
     def add(self):
         term = input(f'The card:\n')
         while term in self.terms.keys():
-            self.say(f'The term "{term}" already exists. Try again:')
-            term = input()
+            term = input(f'The term "{term}" already exists. Try again:\n')
 
-        self.say(f'The definition of the card:')
-        definition = input()
+        definition = input(f'The definition of the card:\n')
+        while definition in self.terms.values():
+            definition = input(
+                f'The definition "{definition}" already exists. Try '
+                f'again:\n')
 
-        found = {d['definition']: t for t, d in self.terms.items()}
+        self.terms[term] = definition
+        with open(self.cards_file, 'w') as cards:
+            cards_list = [f'{t} {d}\n' for t, d in self.terms.items()]
+            print('Trying to add card to cards: ', self.terms, cards_list)
+            cards.writelines(cards_list)
+            cards.flush()
 
-        while definition in found:
-            self.say(
-                f'The definition "{definition}" already exists. Try again:')
-            definition = input()
-
-        self.terms[term] = {'definition': definition, 'errors': 0}
-        self.save_terms()
-
-        self.say(f'The pair ("{term}":"{definition}") has been added.')
+        print(f'The pair ("{term}":"{definition}") has been added.')
 
     def remove(self):
         term = input("Which card?\n")
         try:
             del self.terms[term]
-            self.save_terms()
-
-            self.say('The card has been removed.')
+            with open(self.cards_file, 'w') as cards:
+                cards_list = [f'{t} {d}\n' for t, d in self.terms.items()]
+                cards.writelines(cards_list)
+                cards.flush()
+            print('The card has been removed.')
         except KeyError:
-            self.say(f'Can\'t remove "{term}": there is no such card.')
+            print(f'Can\'t remove "{term}": there is no such card.')
 
     def import_flashes(self):
         file_name = input('File Name:\n')
         try:
-            with open(f'../{file_name}') as flashes:
+            with open(file_name) as flashes:
                 lines = flashes.readlines()
                 imported = [line.strip() for line in lines]
-
                 for f in imported:
-                    t, d, e = f.split(':')
-                    self.terms[t] = {'definition': d, 'errors': e}
-                self.say(f'{len(imported)} cards have been loaded.')
+                    t, d = f.split(':')
+                    self.terms[t] = d
+                print(f'{len(imported)} cards have been loaded.')
 
                 flashes.close()
 
         except FileNotFoundError:
-            self.say('File not found.')
+            print('File not found.')
 
     def export_flashes(self):
         file_name = input('File Name:\n')
-        with open(f'../{file_name}', 'w') as flash_file:
+        with open(file_name, 'w') as flash_file:
             flash_file.writelines(
-                [f'{t}:{d["definition"]}:{d["errors"]}\n' for t, d in
-                 self.terms.items()]
+                [f'{t}:{d}\n' for t, d in self.terms.items()]
             )
-            flash_file.flush()
-        self.say(f'{len(self.terms)} cards have been saved.')
+            flash_file.close()
+        print(f'{len(self.terms)} cards have been saved.')
 
     def ask(self):
-        self.say('How many times to ask?')
-        count = int(input())
+        count = int(input('How many times to ask?\n'))
 
         terms = list(self.terms.keys())
         k = 0
@@ -111,31 +93,30 @@ class Flashcard:
             try:
                 term = terms[k]
             except IndexError:
-                self.say(f'Whoops! There is no card in cards with index: {k}',
-                         sys.stderr)
+                print(
+                    f'Ups! There is no card in cards with index: {k}',
+                    file=sys.stderr
+                )
                 break
 
-            definition = self.terms[term]['definition']
-            self.say(f'Print the definition of "{term}":')
+            definition = self.terms[term]
+            print(f'Print the definition of "{term}":')
             answer = input()
             if answer == definition:
-                self.say('Correct!')
+                print('Correct!')
             else:
-                if answer in [d['definition'] for d in self.terms.values()]:
-                    correct_term = [t
-                                    for t, d in self.terms.items()
-                                    if d['definition'] == answer
-                                    ][0]
+                if answer in self.terms.values():
+                    correct_answer = list(self.terms.keys())[
+                        list(self.terms.values()).index(answer)
+                    ]
+                    # correct_term = self.terms[correct_answer]
 
-                    message = f'Wrong. The right answer is "{definition}", ' \
-                              f'but your definition is correct for "' \
-                              f'{correct_term}".'
-
-                    self.say(message)
+                    print(
+                        f'Wrong. The right answer is "{definition}", '
+                        f'but your definition is correct for "'
+                        f'{correct_answer}".')
                 else:
-                    self.say(f'Wrong. The right answer is "{definition}"')
-                self.terms[term]['errors'] = self.terms[term]['errors'] + 1
-                self.save_terms()
+                    print(f'Wrong. The right answer is "{definition}"')
             if i + 1 > count:
                 break
             else:
@@ -151,10 +132,13 @@ class Flashcard:
         the log after saving it to the file.
         """
         self.log_file = input('File name:\n')
-        with open(f'../{self.log_file}', 'w') as registry:
-            registry.writelines(self.logs)
+        with open(self.log_file, 'w') as registry:
             registry.flush()
-            self.say("The log has been saved.")
+
+        logger_handler = logging.FileHandler(filename=self.log_file)
+        logger_format = '%(asctime)s | %(levelname)s: %(message)s'
+        logger_handler.setFormatter(logging.Formatter(logger_format))
+        logger.addHandler(logger_handler)
 
     def hardest_card(self):
         """
@@ -165,43 +149,24 @@ class Flashcard:
         cards are "term_1", "term_2". If there are no cards with errors in
         the user's answers, print the message There are no cards with errors.
         """
-        hardest_dict = {t: d['errors']
-                        for t, d in self.terms.items()
-                        if int(d['errors']) > 0}
-        logger.debug('hardest_dict: {}'.format(len(hardest_dict)))
-        if len(hardest_dict.keys()) == 0:
-            self.say('There are no cards with errors')
-        else:
-            hardest_counts = list(hardest_dict.values())
-            hardest_score = max(hardest_counts)
-            hardest = [(t, e) for t, e in hardest_dict.items()]
-            if hardest_counts.count(hardest_score) == 1:
-                term, errors = hardest[0]
-                self.say(
-                    f'The hardest card is "{term}". You have {errors} errors '
-                    f'answering it')
-            elif hardest_counts.count(hardest_score) > 1:
-                hardest_terms = ', '.join([f'"{t}"' for t, e in hardest])
-                self.say(f'The hardest cards are {hardest_terms}')
-            else:
-                self.say('There are no cards with errors')
+        print(f'Function "{inspect.stack()[0][3]}" is not implemented jet!',
+              file=sys.stderr)
+
+        return
 
     def reset_stats(self):
         """
         set the count of mistakes to 0 for all the cards and output the
         message Card statistics have been reset.
         """
-        self.terms = {
-            t: {'definition': d['definition'], 'errors': 0}
-            for t, d in self.terms.items()
-        }
-        self.save_terms()
-        self.say('Card statistics have been reset.')
+        print(f'Function "{inspect.stack()[0][3]}" is not implemented jet!',
+              file=sys.stderr)
+
+        return
 
     def run(self):
         actions = ', '.join([a for a in self.ACTIONS])
-        self.say(f"Input the action ({actions}):")
-        action = input()
+        action = input(f"\nInput the action ({actions}):\n")
         if action == 'add':
             self.add()
         elif action == 'remove':
@@ -223,9 +188,8 @@ class Flashcard:
 
         if action != 'exit':
             self.run()
-        return self
 
 
-if __name__ == '__main__':
-    game = Flashcard().run()
-    game.say("Bye bye!")
+Flashcard().run()
+
+print("Bye bye!")
