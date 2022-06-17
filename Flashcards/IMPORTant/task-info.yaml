@@ -489,51 +489,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/10812#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Exception in test #5
-
-    Traceback (most recent call last):
-      File "flashcards.py", line 258, in <module>
-        game = Flashcard(**arguments).run()
-      File "flashcards.py", line 242, in run
-        self.run()
-      File "flashcards.py", line 242, in run
-        self.run()
-      File "flashcards.py", line 231, in run
-        self.ask()
-      File "flashcards.py", line 154, in ask
-        self.terms[term]['errors'] = self.terms[term]['errors'] + 1
-    TypeError: can only concatenate str (not "int") to str
-
-    Please find below the output of your program during this failed test.
-    Note that the '>' character indicates the beginning of the input line.
-
-    ---
-
-    Arguments: --import_from=states.txt
-
-    3 cards have been loaded.
-    Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):
-    > remove
-    Which card?
-    > Texas
-    The card has been removed.
-    Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):
-    > remove
-    Which card?
-    > Florida
-    The card has been removed.
-    Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):
-    > ask
-    How many times to ask?
-    > 2
-    Print the definition of "California":
-    > Sacramento
-    Correct!
-    Print the definition of "California":
-    > Austin
-    Wrong. The right answer is "Sacramento"
-  time: Fri, 17 Jun 2022 16:56:28 UTC
+  message: Congratulations!
+  time: Fri, 17 Jun 2022 17:31:34 UTC
 record: 7

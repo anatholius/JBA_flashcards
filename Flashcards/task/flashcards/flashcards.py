@@ -37,8 +37,8 @@ class Flashcard:
         logger.addHandler(logger_handler)
         logger.setLevel(logging.DEBUG)
 
-        from_ = args['import_from'] if 'import_from' in args else None
-        to_ = args['export_to'] if 'export_to' in args else None
+        from_ = args['import_from']
+        to_ = args['export_to']
         if from_ is not None:
             logger.debug(f'We should import flashes from file: "{from_}"')
             self.import_flashes(from_)
@@ -236,7 +236,7 @@ class Flashcard:
         elif action == 'remove':
             self.remove()
         elif action == 'import':
-            self.import_flashes(self.args['import_from'])
+            self.import_flashes()
         elif action == 'export':
             self.export_flashes()
         elif action == 'ask':
