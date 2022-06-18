@@ -1,2 +1,2 @@
 # JetBrains Academy :: `Flashcards`
-Project made during JetBrains Academy exercising
+`[Python]` Project made during JetBrains Academy exercising
